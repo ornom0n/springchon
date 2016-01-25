@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+    <title>Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h1>Post done!</h1>
+    <p th:text="'name: ' + ${personForm.name}" />
+    <p th:text="'message: ' + ${personForm.message}" />
+	</body>
+</html>

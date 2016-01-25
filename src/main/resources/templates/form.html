@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <form action="#" th:action="@{/}" th:object="${personForm}" method="post">
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                </tr>
+                <tr>
+                    <td>Message:</td>
+                    <td><textarea th:field="*{message}" ></textarea></td>
+                    <td th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Name Error</td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
+            <h1>Other posts are located here</h1>
+        </form>
+    </body>
+</html>
