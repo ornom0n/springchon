@@ -1,22 +1,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <body>
-        <form action="#" th:action="@{/}" th:object="${personForm}" method="post">
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" th:field="*{name}" /></td>
-                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
-                </tr>
-                <tr>
-                    <td>Message:</td>
-                    <td><textarea th:field="*{message}" ></textarea></td>
-                    <td th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Name Error</td>
-                </tr>
-                <tr>
-                    <td><button type="submit">Submit</button></td>
-                </tr>
-            </table>
-            <h1>Other posts are located here</h1>
-        </form>
-    </body>
+	<head>
+    <title>SpringChon</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h1> SpringChon </h1>
+		<form action="#" th:action="@{/}" th:object="${personForm}" method="post">
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" th:field="*{name}" /></td>
+					<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+				</tr>
+				<tr>
+					<td>Message:</td>
+					<td><textarea th:field="*{message}" ></textarea></td>
+					<td th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Name Error</td>
+				</tr>
+				<tr>
+					<td><button type="submit">Submit</button></td>
+				</tr>
+			</table>
+			
+		</form>
+	<h2>Other posts are located here</h2>
+	<div id="post" th:each="post : ${posts}">
+		<b><span th:text = "${post.name}">Name missing </span></b>
+		No. <span th:text = "${post.id}"> Id missing</span>
+		<p th:text = "${post.message}"> Message missing</p>
+		<br/>
+	</div>
+	</body>
 </html>

@@ -4,9 +4,9 @@ import javax.validation.constraints.Size;
 
 public class BoardPost {
 
+	private int id;
 	@Size(min = 2)
 	private String message;
-
 	private String name;
 
 	public String getName() {
@@ -23,6 +23,14 @@ public class BoardPost {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
