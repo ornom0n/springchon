@@ -1,12 +1,8 @@
 package com.eriktest.validation;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -32,20 +28,19 @@ public class WebController extends WebMvcConfigurerAdapter {
 		model.addAttribute("personForm", new BoardPost());
 		ApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
 		
-		PostDAO postDAO = (PostDAO) context.getBean("PostDAO");
-		List<BoardPost> posts = postDAO.getPosts();
-		model.addAttribute("posts", posts);
+		this.addPosts(model, context);
 		((AbstractApplicationContext) context).close();
 		return "form";
 	}
-
+	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String checkPersonInfo(@Valid @ModelAttribute BoardPost boardPost, BindingResult bindingResult,
+	public String checkPersonInfo(@ModelAttribute("personForm") @Valid BoardPost boardPost, BindingResult bindingResult,
 			Model model) {
-		model.addAttribute("personForm", boardPost);
+		//model.addAttribute("personForm", boardPost);
 		ApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
 		
 		if (bindingResult.hasErrors()) {
+			this.addPosts(model, context);
 			((AbstractApplicationContext) context).close();
 			return "form";
 		} 
@@ -56,7 +51,11 @@ public class WebController extends WebMvcConfigurerAdapter {
 			((AbstractApplicationContext) context).close();
 			return "results";
 		}
-
 	}
-
+	
+	private void addPosts(Model model, ApplicationContext context){
+		PostDAO postDAO = (PostDAO) context.getBean("PostDAO");
+		List<BoardPost> posts = postDAO.getPosts();
+		model.addAttribute("posts", posts);
+	}
 }
